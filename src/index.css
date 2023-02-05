@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro', serif;
+}
+
+:root {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  transform-origin: center;
+  animation: spin infinite 20s linear;
+}
+.spinner:hover {
+  animation-play-state: paused;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-10%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+.bounce {
+  animation: bounce 1s infinite;
+}
