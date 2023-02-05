@@ -21,9 +21,13 @@ export const categorySlice = createSlice({
   },
 })
 
-export const getAll = (page: any) => async (dispatch: any) => {
+export const getAll = (page: any, storeId: any) => async (dispatch: any) => {
   try {
-    const response = await axios.get(`${API_URL}/${ROUTE_NAME}?page=${page}`)
+    const response = await axios.get(
+      `${API_URL}/${ROUTE_NAME}?page=${page}${
+        storeId ? `&storeId=${storeId}` : ''
+      }`
+    )
     dispatch(all(response.data))
   } catch (err: any) {
     throw new Error(err)

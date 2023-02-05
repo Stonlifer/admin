@@ -14,7 +14,7 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import { useEffect, useState } from 'react'
 
-import { useSearch } from '@tanstack/react-router'
+import { Link, useSearch } from '@tanstack/react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 import type { RootState, AppDispatch } from '../Store'
@@ -35,10 +35,10 @@ function Store() {
 
   const dispatch = useAppDispatch()
 
-  const { page }: any = useSearch()
+  const { page, storeId }: any = useSearch()
 
   useEffect(() => {
-    dispatch(getAll(page ? page : 1))
+    dispatch(getAll(page ? page : 1, storeId ? storeId : null))
   }, [page])
 
   const handleFormDrawerToggle = () => {
@@ -103,6 +103,9 @@ function Store() {
                 Image
               </th>
               <th scope="col" className="px-6 py-3">
+                Store Id
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
@@ -122,9 +125,10 @@ function Store() {
                     <img
                       src={item.imagePath}
                       alt="category"
-                      className="h-44 w-44 object-contain"
+                      className="max-h-[11rem] max-w-[11rem] object-contain"
                     />
                   </td>
+                  <td className="px-6 py-4">{item.storeId}</td>
                   <td className="px-6 py-4">
                     <IconButton
                       onClick={() => handleEditFormDrawerToggle(item.id)}
@@ -139,6 +143,16 @@ function Store() {
                     >
                       <DeleteOutlineOutlinedIcon className="text-primary" />
                     </IconButton>
+
+                    <Link
+                      to="/product"
+                      search={{
+                        categoryId: item.id,
+                      }}
+                      className="rounded-full border border-primary py-2 px-4 text-primary hover:bg-primary/10"
+                    >
+                      Products
+                    </Link>
                   </td>
                 </tr>
               ))}

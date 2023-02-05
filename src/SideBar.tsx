@@ -34,7 +34,7 @@ function SideBar() {
                 <ListItemIcon>
                   <CategoryOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Manage Categories" />
+                <ListItemText primary="Manage All Categories" />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -45,7 +45,7 @@ function SideBar() {
                 <ListItemIcon>
                   <CheckroomIcon />
                 </ListItemIcon>
-                <ListItemText primary="Manage Products" />
+                <ListItemText primary="Manage All Products" />
               </ListItemButton>
             </ListItem>
           </Link>

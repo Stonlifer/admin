@@ -35,10 +35,10 @@ function Store() {
 
   const dispatch = useAppDispatch()
 
-  const { page }: any = useSearch()
+  const { page, categoryId }: any = useSearch()
 
   useEffect(() => {
-    dispatch(getAll(page ? page : 1))
+    dispatch(getAll(page ? page : 1, categoryId ? categoryId : null))
   }, [page])
 
   const handleFormDrawerToggle = () => {
@@ -106,6 +106,9 @@ function Store() {
                 Image
               </th>
               <th scope="col" className="px-6 py-3">
+                Category Id
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
@@ -121,14 +124,15 @@ function Store() {
                     {item.id}
                   </th>
                   <td className="px-6 py-4">{item.name}</td>
-                  <td className="px-6 py-4">{item.price}</td>
+                  <td className="px-6 py-4">$ {item.price}</td>
                   <td className="px-6 py-4">
                     <img
                       src={item.imagePath}
                       alt="product"
-                      className="h-44 w-44 object-contain"
+                      className="max-h-[11rem] max-w-[11rem] object-contain"
                     />
                   </td>
+                  <td className="px-6 py-4">{item.categoryId}</td>
                   <td className="px-6 py-4">
                     <IconButton
                       onClick={() => handleEditFormDrawerToggle(item.id)}

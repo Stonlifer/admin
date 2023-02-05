@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unsafe-optional-chaining */
-import { Link } from '@tanstack/react-router'
+import { Link, useSearch } from '@tanstack/react-router'
 
 function Pagination({ meta }: any) {
+  const currentParams: any = useSearch()
+
   const previous = meta?.current_page > 1 ? meta?.current_page - 1 : null
   const next =
     meta?.current_page < meta?.last_page ? meta?.current_page + 1 : null
@@ -18,6 +20,7 @@ function Pagination({ meta }: any) {
     <>
       <Link
         search={{
+          ...currentParams,
           page: 1,
         }}
         className="hidden sm:block"
@@ -43,6 +46,7 @@ function Pagination({ meta }: any) {
   const normalPreviousTemplate = (
     <Link
       search={{
+        ...currentParams,
         page: previous,
       }}
     >
@@ -69,6 +73,7 @@ function Pagination({ meta }: any) {
 
       <Link
         search={{
+          ...currentParams,
           page: meta?.last_page,
         }}
         className="hidden sm:block"
@@ -91,6 +96,7 @@ function Pagination({ meta }: any) {
         <ul className="inline-flex -space-x-px">
           <Link
             search={{
+              ...currentParams,
               page: previous,
             }}
           >
@@ -121,6 +127,7 @@ function Pagination({ meta }: any) {
           {next != null ? (
             <Link
               search={{
+                ...currentParams,
                 page: next,
               }}
             >
@@ -139,6 +146,7 @@ function Pagination({ meta }: any) {
 
           <Link
             search={{
+              ...currentParams,
               page: next,
             }}
           >
