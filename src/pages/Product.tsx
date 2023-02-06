@@ -165,7 +165,7 @@ function Store() {
         sx={{
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 500,
+            width: { sm: 500, xs: '100%' },
           },
         }}
       >
@@ -179,7 +179,7 @@ function Store() {
         sx={{
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 500,
+            width: { sm: 500, xs: '100%' },
           },
         }}
       >
@@ -210,11 +210,17 @@ function Store() {
 }
 
 function StoreForm({ action }: any) {
+  const { categoryId }: any = useSearch()
+
   function handleSubmit(e: any) {
     e.preventDefault()
 
     const form = e.target
     const formData = new FormData(form)
+
+    if (categoryId) {
+      formData.append('category_id', categoryId)
+    }
 
     action(formData)
   }
@@ -229,6 +235,7 @@ function StoreForm({ action }: any) {
         <div>
           <label htmlFor="name">Name:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="name"
             placeholder="Name"
@@ -238,20 +245,26 @@ function StoreForm({ action }: any) {
         <div>
           <label htmlFor="price">Price:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="price"
             placeholder="price"
           />
         </div>
 
-        <div>
-          <label htmlFor="Category">Category id:</label>
-          <input
-            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-            name="category_id"
-            placeholder="category_id"
-          />
-        </div>
+        {categoryId ? (
+          ''
+        ) : (
+          <div>
+            <label htmlFor="Category">Category id:</label>
+            <input
+              required
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+              name="category_id"
+              placeholder="category_id"
+            />
+          </div>
+        )}
 
         <div>
           <label>Image:</label>
@@ -267,11 +280,17 @@ function StoreForm({ action }: any) {
 }
 
 function StoreFormEdit({ action }: any) {
+  const { categoryId }: any = useSearch()
+
   function handleSubmit(e: any) {
     e.preventDefault()
 
     const form = e.target
     const formData = new FormData(form)
+
+    if (categoryId) {
+      formData.append('category_id', categoryId)
+    }
 
     action(formData)
   }
@@ -286,6 +305,7 @@ function StoreFormEdit({ action }: any) {
         <div>
           <label htmlFor="name">Name:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="name"
             placeholder="Name"
@@ -295,20 +315,26 @@ function StoreFormEdit({ action }: any) {
         <div>
           <label htmlFor="price">Price:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="price"
             placeholder="price"
           />
         </div>
 
-        <div>
-          <label htmlFor="Category">Category id:</label>
-          <input
-            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-            name="category_id"
-            placeholder="category_id"
-          />
-        </div>
+        {categoryId ? (
+          ''
+        ) : (
+          <div>
+            <label htmlFor="Category">Category id:</label>
+            <input
+              required
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+              name="category_id"
+              placeholder="category_id"
+            />
+          </div>
+        )}
 
         <div>
           <label>Image:</label>
@@ -354,6 +380,7 @@ function ImageUpload() {
   return (
     <div>
       <input
+        required
         type="file"
         name="image"
         onChange={onSelectFile}

@@ -171,7 +171,7 @@ function Store() {
         sx={{
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 500,
+            width: { sm: 500, xs: '100%' },
           },
         }}
       >
@@ -185,7 +185,7 @@ function Store() {
         sx={{
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 500,
+            width: { sm: 500, xs: '100%' },
           },
         }}
       >
@@ -216,11 +216,19 @@ function Store() {
 }
 
 function StoreForm({ action }: any) {
+  const { storeId }: any = useSearch()
+
+  // console.log('action', storeId)
+
   function handleSubmit(e: any) {
     e.preventDefault()
 
     const form = e.target
     const formData = new FormData(form)
+
+    if (storeId) {
+      formData.append('store_id', storeId)
+    }
 
     action(formData)
   }
@@ -235,20 +243,26 @@ function StoreForm({ action }: any) {
         <div>
           <label htmlFor="name">Name:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="name"
             placeholder="Name"
           />
         </div>
 
-        <div>
-          <label htmlFor="store">Store id:</label>
-          <input
-            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-            name="store_id"
-            placeholder="store_id"
-          />
-        </div>
+        {storeId ? (
+          ''
+        ) : (
+          <div>
+            <label htmlFor="store">Store id:</label>
+            <input
+              required
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+              name="store_id"
+              placeholder="store_id"
+            />
+          </div>
+        )}
 
         <div>
           <label>Image:</label>
@@ -264,11 +278,17 @@ function StoreForm({ action }: any) {
 }
 
 function StoreFormEdit({ action }: any) {
+  const { storeId }: any = useSearch()
+
   function handleSubmit(e: any) {
     e.preventDefault()
 
     const form = e.target
     const formData = new FormData(form)
+
+    if (storeId) {
+      formData.append('store_id', storeId)
+    }
 
     action(formData)
   }
@@ -283,20 +303,26 @@ function StoreFormEdit({ action }: any) {
         <div>
           <label htmlFor="name">Name:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="name"
             placeholder="Name"
           />
         </div>
 
-        <div>
-          <label htmlFor="store">Store id:</label>
-          <input
-            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-            name="store_id"
-            placeholder="store_id"
-          />
-        </div>
+        {storeId ? (
+          ''
+        ) : (
+          <div>
+            <label htmlFor="store">Store id:</label>
+            <input
+              required
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+              name="store_id"
+              placeholder="store_id"
+            />
+          </div>
+        )}
 
         <div>
           <label>Image:</label>
@@ -342,6 +368,7 @@ function ImageUpload() {
   return (
     <div>
       <input
+        required
         type="file"
         name="image"
         onChange={onSelectFile}

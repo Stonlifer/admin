@@ -171,7 +171,7 @@ function Store() {
         sx={{
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 500,
+            width: { sm: 500, xs: '100%' },
           },
         }}
       >
@@ -185,7 +185,7 @@ function Store() {
         sx={{
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            width: 500,
+            width: { sm: 500, xs: '100%' },
           },
         }}
       >
@@ -236,6 +236,7 @@ function StoreForm({ action }: any) {
         <div>
           <label htmlFor="name">Name:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="name"
             placeholder="Name"
@@ -245,6 +246,7 @@ function StoreForm({ action }: any) {
         <div>
           <label htmlFor="link">Link:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="link"
             placeholder="Link"
@@ -284,6 +286,7 @@ function StoreFormEdit({ action }: any) {
         <div>
           <label htmlFor="name">Name:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="name"
             placeholder="Name"
@@ -293,6 +296,7 @@ function StoreFormEdit({ action }: any) {
         <div>
           <label htmlFor="link">Link:</label>
           <input
+            required
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             name="link"
             placeholder="Link"
@@ -342,7 +346,13 @@ function ImageUpload() {
 
   return (
     <div>
-      <input type="file" name="logo" onChange={onSelectFile} accept="image/*" />
+      <input
+        required
+        type="file"
+        name="logo"
+        onChange={onSelectFile}
+        accept="image/*"
+      />
       {selectedFile && (
         <img src={preview} alt="preview" className="h-60 w-full object-cover" />
       )}
